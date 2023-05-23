@@ -89,19 +89,19 @@ class ImagePathDataset(torch.utils.data.Dataset):
             img = self.transforms(img)
         return img
 
-    class ImageDataset(torch.utils.data.Dataset):
-        def __init__(self, images, transforms=None):
-            self.images = images
-            self.transforms = transforms
+class ImageDataset(torch.utils.data.Dataset):
+    def __init__(self, images, transforms=None):
+        self.images = images
+        self.transforms = transforms
 
-        def __len__(self):
-            return len(self.images)
+    def __len__(self):
+        return len(self.images)
 
-        def __getitem__(self, i):
-            img = self.images[i]
-            if self.transforms is not None:
-                img = self.transforms(img)
-            return img
+    def __getitem__(self, i):
+        img = self.images[i]
+        if self.transforms is not None:
+            img = self.transforms(img)
+        return img
 
 
 def get_activations(files, model, batch_size=50, dims=2048, device='cpu',
