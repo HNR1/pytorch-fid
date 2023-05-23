@@ -136,6 +136,7 @@ def get_activations(files, model, batch_size=50, dims=2048, device='cpu',
         dataset = ImageDataset(files, transforms=TF.ToTensor())
     else:
         dataset = ImagePathDataset(files, transforms=TF.ToTensor())
+    print(type(dataset))
     dataloader = torch.utils.data.DataLoader(dataset,
                                              batch_size=batch_size,
                                              shuffle=False,
