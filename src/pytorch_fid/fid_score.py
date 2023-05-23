@@ -89,6 +89,20 @@ class ImagePathDataset(torch.utils.data.Dataset):
             img = self.transforms(img)
         return img
 
+    class ImageDataset(torch.utils.data.Dataset):
+        def __init__(self, images, transforms=None):
+            self.images = images
+            self.transforms = transforms
+
+        def __len__(self):
+            return len(self.images)
+
+        def __getitem__(self, i):
+            img = self.images[i]
+            if self.transforms is not None:
+                img = self.transforms(img)
+            return img
+
 
 def get_activations(files, model, batch_size=50, dims=2048, device='cpu',
                     num_workers=1):
@@ -113,14 +127,15 @@ def get_activations(files, model, batch_size=50, dims=2048, device='cpu',
     """
     model.eval()
 
-    print(type(files))
-
     if batch_size > len(files):
         print(('Warning: batch size is bigger than the data size. '
                'Setting batch size to data size'))
         batch_size = len(files)
 
-    dataset = ImagePathDataset(files, transforms=TF.ToTensor())
+    if isinstance(files[0], Image.Image):
+        dataset = ImageDataset(files, transforms=TF.ToTensor())
+    else:
+        dataset = ImagePathDataset(files, transforms=TF.ToTensor())
     dataloader = torch.utils.data.DataLoader(dataset,
                                              batch_size=batch_size,
                                              shuffle=False,
@@ -131,7 +146,7 @@ def get_activations(files, model, batch_size=50, dims=2048, device='cpu',
 
     start_idx = 0
 
-    for batch in tqdm(dataloader):
+    for batch in dataloader:
         batch = batch.to(device)
 
         with torch.no_grad():
