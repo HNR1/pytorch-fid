@@ -310,9 +310,9 @@ def calc_fid_given_lists(l1, l2, dims=2048, num_workers=1):
     block_idx = InceptionV3.BLOCK_INDEX_BY_DIM[dims]
     model = InceptionV3([block_idx]).to(device)
 
-    m1, s1 = fid.calculate_activation_statistics(l1, model, min(50,len(l1)), dims, device, num_workers)
-    m2, s2 = fid.calculate_activation_statistics(l2, model, min(50,len(l2)), dims, device, num_workers)
-    fid_score = fid.calculate_frechet_distance(m1, s1, m2, s2)
+    m1, s1 = calculate_activation_statistics(l1, model, min(50,len(l1)), dims, device, num_workers)
+    m2, s2 = calculate_activation_statistics(l2, model, min(50,len(l2)), dims, device, num_workers)
+    fid_score = calculate_frechet_distance(m1, s1, m2, s2)
 
     return fid_score
 
