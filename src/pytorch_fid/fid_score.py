@@ -304,6 +304,19 @@ def save_fid_stats(paths, batch_size, device, dims, num_workers=1):
     np.savez_compressed(paths[1], mu=m1, sigma=s1)
 
 
+def calc_fid_given_lists(l1, l2, dims=2048, num_workers=1):
+    """Calculate fid with lists of images instead of using file paths"""
+    device = torch.device('cuda' if (torch.cuda.is_available()) else 'cpu')
+    block_idx = InceptionV3.BLOCK_INDEX_BY_DIM[dims]
+    model = InceptionV3([block_idx]).to(device)
+
+    m1, s1 = fid.calculate_activation_statistics(l1, model, min(50,len(l1)), dims, device, num_workers)
+    m2, s2 = fid.calculate_activation_statistics(l2, model, min(50,len(l2)), dims, device, num_workers)
+    fid_score = fid.calculate_frechet_distance(m1, s1, m2, s2)
+
+    return fid_score
+
+
 def main():
     args = parser.parse_args()
 
