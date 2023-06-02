@@ -306,6 +306,10 @@ def save_fid_stats(paths, batch_size, device, dims, num_workers=1):
 
 def calc_fid_given_lists(l1, l2, dims=2048, num_workers=1):
     """Calculate fid with lists of images instead of using file paths"""
+    if isinstance(l1, Image.Image):
+        l1 = [l1]
+    if isinstance(l2, Image.Image):
+        l2 = [l2]
     device = torch.device('cuda' if (torch.cuda.is_available()) else 'cpu')
     block_idx = InceptionV3.BLOCK_INDEX_BY_DIM[dims]
     model = InceptionV3([block_idx]).to(device)
