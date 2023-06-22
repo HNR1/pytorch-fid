@@ -21,14 +21,14 @@ def get_version(rel_path):
 
 if __name__ == '__main__':
     setuptools.setup(
-        name='pytorch-fid',
+        name='pytorch_fid',
         version=get_version(os.path.join('src', 'pytorch_fid', '__init__.py')),
         author='Max Seitzer',
         description=('Package for calculating Frechet Inception Distance (FID)'
                      ' using PyTorch'),
         long_description=read('README.md'),
         long_description_content_type='text/markdown',
-        url='https://github.com/HNR1/pytorch-fid',
+        url='https://github.com/HNR1/pytorch_fid',
         package_dir={'': 'src'},
         packages=setuptools.find_packages(where='src'),
         classifiers=[
@@ -38,7 +38,7 @@ if __name__ == '__main__':
         python_requires='>=3.5',
         entry_points={
             'console_scripts': [
-                'pytorch-fid = pytorch_fid.fid_score:main',
+                'pytorch_fid = fid.fid_score:main',
             ],
         },
         install_requires=[
