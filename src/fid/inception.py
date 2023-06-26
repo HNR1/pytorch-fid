@@ -216,8 +216,10 @@ def fid_inception_v3():
     inception.Mixed_7b = FIDInceptionE_1(1280)
     inception.Mixed_7c = FIDInceptionE_2(2048)
 
-    state_dict = load_state_dict_from_url(FID_WEIGHTS_URL, progress=True)
-    inception.load_state_dict(state_dict)
+    #state_dict = load_state_dict_from_url(FID_WEIGHTS_URL, progress=True)
+    #inception.load_state_dict(state_dict)
+    PATH = '/Users/henri/Info/ba-code/pytorch_fid/src/assets/pt_inception-2015-12-05-6726825d.pth'
+    inception.load_state_dict(torch.load(PATH))
     return inception
 
 
