@@ -219,8 +219,8 @@ def fid_inception_v3():
 
     #state_dict = load_state_dict_from_url(FID_WEIGHTS_URL, progress=True)
     #inception.load_state_dict(state_dict)
-    PATH = '/gpfs/project/hebal100/ba-code/pytorch_fid/src/assets/pt_inception-2015-12-05-6726825d.pth'
-    inception.load_state_dict(torch.load(PATH))
+    PATH_FOR_HPC = '/gpfs/project/hebal100/ba-code/pytorch_fid/src/assets/pt_inception-2015-12-05-6726825d.pth'
+    inception.load_state_dict(torch.load(PATH_FOR_HPC))
     return inception
 
 
