@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
 
+'''
 try:
     from torchvision.models.utils import load_state_dict_from_url
 except ImportError:
@@ -11,7 +12,7 @@ except ImportError:
 # Inception weights ported to Pytorch from
 # http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 FID_WEIGHTS_URL = 'https://github.com/mseitzer/pytorch-fid/releases/download/fid_weights/pt_inception-2015-12-05-6726825d.pth'  # noqa: E501
-
+'''
 
 class InceptionV3(nn.Module):
     """Pretrained InceptionV3 network returning feature maps"""
@@ -218,7 +219,7 @@ def fid_inception_v3():
 
     #state_dict = load_state_dict_from_url(FID_WEIGHTS_URL, progress=True)
     #inception.load_state_dict(state_dict)
-    PATH = '/Users/henri/Info/ba-code/pytorch_fid/src/assets/pt_inception-2015-12-05-6726825d.pth'
+    PATH = '/ba-code/pytorch_fid/src/assets/pt_inception-2015-12-05-6726825d.pth'
     inception.load_state_dict(torch.load(PATH))
     return inception
 
