@@ -22,7 +22,7 @@ def get_version(rel_path):
 if __name__ == '__main__':
     setuptools.setup(
         name='pytorch_fid',
-        version=get_version(os.path.join('src', 'pytorch_fid', '__init__.py')),
+        version=get_version(os.path.join('src', 'fid', '__init__.py')),
         author='Max Seitzer',
         description=('Package for calculating Frechet Inception Distance (FID)'
                      ' using PyTorch'),
