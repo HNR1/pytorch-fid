@@ -49,7 +49,10 @@ except ImportError:
     def tqdm(x):
         return x
 
-from fid.inception import InceptionV3
+try:
+    from fid.inception import InceptionV3
+except:
+    from pytorch_fid.src.fid.inception import InceptionV3
 
 parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
 parser.add_argument('--batch-size', type=int, default=50,
